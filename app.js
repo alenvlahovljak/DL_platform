@@ -46,5 +46,6 @@ app.get("/portal", (req, res)=>{
 
 app.listen(3000,()=>{
     console.log("DL server has started!");
+    console.log("*************************************");
 });
 

@@ -25,7 +25,6 @@ const userSchema = new mongoose.Schema({
     birthDate: {
         type: Date,
         required: true,
-        trim: true
     },
     streetName: {
         type: String,
@@ -40,9 +39,7 @@ const userSchema = new mongoose.Schema({
     },
     postalCode: {
         type: String,
-        //test it
-        trim: true,
-        default: "No Postal code",
+        required: true,
         validate(value){
             if(!validator.isPostalCode(value, "any"))
                 throw new Error("Poštanski broj nije validan!");
@@ -67,12 +64,13 @@ const userSchema = new mongoose.Schema({
         minlength: [3, "Ime grada mora sadržavati minimalno 3 karaktera!"]
     },
     phone: {
-        type: Number,
+        type: String,
         required: true,
+        trim: true,
         min: [6, "Broje telefona je prekratak!"],
         validate(value){
             if(!validator.isMobilePhone(value, "any"))
-                throw new Error("Unesena e-mail adresa nije validna!");
+                throw new Error("Uneseni telefonski broj nije validan!");
         }
     },
     email: {

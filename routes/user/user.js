@@ -1,12 +1,14 @@
 //Modules config
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
+
 
 //Mongoose models config
 const User = require("../../models/User");
 
-//********   USER   **********/
+
+
+//********   USER   **********//
 
 //NEW route
 router.get("/users/new", (req, res)=>{
@@ -15,7 +17,12 @@ router.get("/users/new", (req, res)=>{
 
 //CREATE route
 router.post("/users", (req, res)=>{
-    res.send(req.body);
+    User.create(req.body.newUser).then((user)=>{
+        console.log(user);
+        return res.redirect("/portal");
+    }).catch((err)=>{
+        throw new Error(err);
+    });
 });
 
 //SHOW route
