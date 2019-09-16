@@ -9,17 +9,17 @@ const User = require("../../models/User");
 //********   USER   **********/
 
 //NEW route
-router.get("/user/new", (req, res)=>{
+router.get("/users/new", (req, res)=>{
     res.render("user/new");
 });
 
 //CREATE route
-router.post("/user", (req, res)=>{
+router.post("/users", (req, res)=>{
     res.send(req.body);
 });
 
 //SHOW route
-router.get("/user/:id", (req, res)=>{
+router.get("/users/:id", (req, res)=>{
     res.render("user/show");
 });
 

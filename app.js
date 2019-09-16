@@ -11,9 +11,13 @@ const mongoose = require("mongoose");
 //Routes set-up
 const userRoutes = require("./routes/user/user");
 
+//Application set-up
+app.set("view engine", "ejs");
 
 //Application config
 app.use(bodyParser.urlencoded({extended: true}));
+//testing purpose
+app.use(bodyParser.json());
 
 
 //Mongoose config
@@ -21,8 +25,7 @@ let url = process.env.DATABASEURL || "mongodb://localhost:27017/DL_platfom";
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
 
 
-//Application set-up
-app.set("view engine", "ejs");
+
 
 
 //Routes config
