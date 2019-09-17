@@ -30,7 +30,12 @@ router.get("/users/:id", (req, res)=>{
 
 //EDIT route
 router.get("/users/:id/edit", (req, res)=>{
-    res.status(204);
+    User.findById(req.params.id).then((user)=>{
+        //Note: ES6 notation {user} same as {user: user}
+        res.render("user/edit", {user: user});
+    }).catch((err)=>{
+        throw new Error(err);
+    });
 });
 
 //UPDATE route

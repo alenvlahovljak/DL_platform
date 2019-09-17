@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose"); 
-
+const methodOverride  = require("method-override");
 
 //Mongoose models config
 
@@ -19,6 +19,8 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 //testing purpose
 app.use(bodyParser.json());
+app.use(methodOverride("_method"));
+
 
 
 //Mongoose config
