@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 
 //Routes set-up
 const userRoutes = require("./routes/user/user");
+const indexRoutes = require("./routes/index");
 
 //Application set-up
 app.set("view engine", "ejs");
@@ -30,6 +31,7 @@ mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
 
 //Routes config
 app.use(userRoutes);
+app.use(indexRoutes);
 
 
 

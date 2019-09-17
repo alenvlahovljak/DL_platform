@@ -3,26 +3,10 @@ const express = require("express");
 const router = express.Router();
 
 
-//Mongoose models config
+//Mongoose model config
 const User = require("../../models/User");
 
-
-
 //********   USER   **********//
-
-//NEW route
-router.get("/users/new", (req, res)=>{
-    res.render("user/new");
-});
-
-//CREATE route
-router.post("/users", (req, res)=>{
-    User.create(req.body.newUser).then((user)=>{
-        return res.status(210).redirect("/portal");
-    }).catch((err)=>{
-        throw new Error(err);
-    });
-});
 
 //SHOW route
 router.get("/users/:id", (req, res)=>{
@@ -59,5 +43,5 @@ router.delete("/users/:id", (req, res)=>{
 });
 
 
-//Exporting Router()
+//Exporting routes
 module.exports = router;
