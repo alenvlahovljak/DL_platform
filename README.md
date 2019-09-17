@@ -1,8 +1,7 @@
 # DL_platform
  Distance Learning platform
 
-# ![Mongodb/Express.js/React.js/Node.js Application]
-
+### ![Mongodb/Express.js/React.js/Node.js Application]
 
 # Getting started
 
