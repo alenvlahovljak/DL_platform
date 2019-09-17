@@ -27,6 +27,8 @@ router.post("/users", (req, res)=>{
 //SHOW route
 router.get("/users/:id", (req, res)=>{
     User.findById(req.params.id).then((user)=>{
+        if(!user)
+            res.status(302);
         return res.send(user);
     }).catch((err)=>{
         throw new Error(err);
@@ -46,5 +48,16 @@ router.put("/users/:id", (req, res)=>{
         throw new Error(err);
     });
 });
+
+//DESTROY route
+router.delete("/users/:id", (req, res)=>{
+    User.findByIdAndRemove(req.params.id).then(()=>{
+        res.redirect("/users/" + req.params.id);
+    }).catch((err)=>{
+        throw new Error(err);
+    });
+});
+
+
 
 module.exports = router;
