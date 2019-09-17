@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 
 
 //Mongoose config
-let url = process.env.DATABASEURL || "mongodb://localhost:27017/DL_platfom";
+let url = process.env.DATABASEURL || "mongodb://localhost:27017/DL_platform";
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
 
 
