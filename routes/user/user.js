@@ -8,6 +8,15 @@ const User = require("../../models/User");
 
 //********   USER   **********//
 
+//INDEX route
+router.get("/users", (req, res)=>{
+    User.find({}).then((users)=>{
+        res.send(users);
+    }).catch((err)=>{
+        throw new Error(err);
+    });
+});
+
 //SHOW route
 router.get("/users/:id", (req, res)=>{
     User.findById(req.params.id).then((user)=>{
