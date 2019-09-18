@@ -1,0 +1,51 @@
+<%include ../partials/header%>
+    <div class="ui container">
+        <form action="/lecturers/<%=lecturer._id%>?_method=PUT" method="POST" class="ui-form">
+            <div class="field">
+                <label for="firstName">Ime</label>
+                <input type="text" name="lecturerUpdate[firstName]" id="firstName" value="<%=lecturer.firstName%>"/>
+            </div> 
+            <div class="field">
+                <label for="lastName">Prezime</label>
+                <input type="text" name="lecturerUpdate[lastName]" id="lastName" value="<%=lecturer.lastName%>"/>
+            </div>
+            <div class="field">
+                <label for="birthDate">Datum rođenja</label>
+                <input type="date" name="lecturerUpdate[birthDate]" id="birthDate" value="<%=lecturer.birthDate%>"/>
+            </div>
+            <div class="field">
+                <label for="streetNum">Ulica</label>
+                <input type="text" name="lecturerUpdate[streetName]" id="streetName" value="<%=lecturer.streetName%>"/>
+            </div>
+            <div class="field">
+                <label for="streetNum">broj</label>
+                <input type="number" name="lecturerUpdate[streetNum]" id="streetNum" value="<%=lecturer.streetNum%>"/>
+            </div>
+            <div class="field">
+                <label for="postalCode">Poštanski broj</label>
+                <input type="text" name="lecturerUpdate[postalCode]" id="postalCode" value="<%=lecturer.postalCode%>"/>
+            </div>
+            <div class="field">
+                <label for="municipality">Opština</label>
+                <input type="text" name="lecturerUpdate[municipality]" id="municipality" value="<%=lecturer.municipality%>"/>
+            </div>
+            <div class="field">
+                <label for="city">Grad</label>
+                <input type="text" name="lecturerUpdate[city]" id="city" value="<%=lecturer.city%>"/>
+            </div>
+            <div class="field">
+                <label for="country">Država</label>
+                <input type="text" name="lecturerUpdate[country]" id="country" value="<%=lecturer.country%>"/>
+            </div>
+            <div class="field">
+                <label for="phone">Broj mob.</label>
+                <input type="tel" name="lecturerUpdate[phone]" id="phone" value="<%=lecturer.phone%>"/>
+            </div>
+            <div class="field">
+                <label for="email">E-mail</label>
+                <input type="email" name="lecturerUpdate[email]" id="email" value="<%=lecturer.email%>"/>
+            </div>
+            <input type="submit" value="Ažuriraj">
+        </form>
+    </div>
+<%include ../partials/footer%>

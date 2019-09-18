@@ -4,7 +4,7 @@ const validator = require("validator");
 
 
 //Mongoose schema config
-const userSchema = new mongoose.Schema({
+const lecturerSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: true,
@@ -93,5 +93,5 @@ const userSchema = new mongoose.Schema({
 });
 
 
-//Exprting mongoose model
-module.exports = mongoose.model("User", userSchema);
+//Exporting mongoose model
+module.exports = mongoose.model("Lecturer", lecturerSchema);

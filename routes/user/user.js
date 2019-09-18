@@ -9,7 +9,7 @@ const User = require("../../models/User");
 //********   USER   **********//
 
 //INDEX route
-router.get("/users", (req, res)=>{
+router.get("/portal/users", (req, res)=>{
     User.find({}).then((users)=>{
         res.send(users);
     }).catch((err)=>{
@@ -18,7 +18,7 @@ router.get("/users", (req, res)=>{
 });
 
 //SHOW route
-router.get("/users/:id", (req, res)=>{
+router.get("/portal/users/:id", (req, res)=>{
     User.findById(req.params.id).then((user)=>{
         if(!user)
             res.status(302);
@@ -29,7 +29,7 @@ router.get("/users/:id", (req, res)=>{
 });
 
 //EDIT route
-router.get("/users/:id/edit", (req, res)=>{
+router.get("/portal/users/:id/edit", (req, res)=>{
     User.findById(req.params.id).then((user)=>{
         //Note: ES6 notation {user} same as {user: user}
         res.render("user/edit", {user: user});
@@ -39,18 +39,18 @@ router.get("/users/:id/edit", (req, res)=>{
 });
 
 //UPDATE route
-router.put("/users/:id", (req, res)=>{
+router.put("/portal/users/:id", (req, res)=>{
     User.findByIdAndUpdate(req.params.id, req.body.userUpdate).then((user)=>{
-        return res.redirect("/users/" + req.params.id);
+        return res.redirect("/portal/users/" + req.params.id);
     }).catch((err)=>{
         throw new Error(err);
     });
 });
 
 //DESTROY route
-router.delete("/users/:id", (req, res)=>{
+router.delete("/portal/users/:id", (req, res)=>{
     User.findByIdAndRemove(req.params.id).then(()=>{
-        res.redirect("/users/" + req.params.id);
+        res.redirect("/portal/users/" + req.params.id);
     }).catch((err)=>{
         throw new Error(err);
     });

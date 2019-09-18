@@ -9,8 +9,10 @@ const methodOverride  = require("method-override");
 
 
 //Routes set-up
-const userRoutes = require("./routes/user/user");
 const indexRoutes = require("./routes/index");
+const lecturerRoutes = require("./routes/lecturer/lecturer");
+const userRoutes = require("./routes/user/user");
+const courseRoutes = require("./routes/course/course");
 
 //Application set-up
 app.set("view engine", "ejs");
@@ -32,13 +34,10 @@ mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
 
 
 //Routes config
-app.use(userRoutes);
 app.use(indexRoutes);
-
-
-
-
-
+app.use(userRoutes);
+app.use(courseRoutes);
+app.use(lecturerRoutes);
 
 
 //********   MAIN   **********/
@@ -48,6 +47,7 @@ app.get("/portal", (req, res)=>{
 });
 
 
+//Port listening
 app.listen(3000,()=>{
     console.log("DL server has started!");
     console.log("*************************************");

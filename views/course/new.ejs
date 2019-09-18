@@ -1,0 +1,30 @@
+<%include ../partials/header%>
+    <div class="ui container">
+        <form action="/courses" method="POST" class="ui-form">
+            <div class="field">
+                <label for="courseName">Ime Kursa</label>
+                <input type="text" name="newCourse[courseName]" id="courseName"/>
+            </div> 
+            <div class="field">
+                <label for="moduleName">Ime modula</label>
+                <input type="text" name="newCourse[moduleName]" id="moduleName"/>
+            </div>
+            <div class="field">
+                <label for="moduleDuration">Trajanje modula (min)</label>
+                <input type="number" name="newCourse[moduleDuration]" id="moduleDuration"/>
+            </div>
+            <!--Option group-->
+            <div class="field">
+                <label for="streetNum">Predavač</label>
+                <input type="text" name="newCourse[streetName]" id="streetName"/>
+            </div>
+            <!---->
+            <div class="field">
+                <label for="moduleVideo">Video materijal</label>
+                <input type="file" name="newCourse[video]"/>
+            </div>
+            <input type="submit" value="Pošalji"/>
+            <input type="reset" value="Obrišite unos">
+        </form>
+    </div>
+<%include ../partials/footer%>
