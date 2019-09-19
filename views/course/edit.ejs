@@ -1,0 +1,39 @@
+<%include ../partials/header%>
+    <div class="ui container">
+        <form action="/portal/courses/<%=course._id%>" method="POST" class="ui-form">
+            <div class="field">
+                <label for="courseName">Ime Kursa</label>
+                <input type="text" name="courseUpdate[courseName]" id="courseName" value="<%=course.courseName%>"/>
+            </div> 
+            <div class="field">
+                <label for="moduleName">Ime modula</label>
+                <input type="text" name="courseUpdate[moduleName]" id="moduleName" value="<%=course.moduleName%>"/>
+            </div>
+            <div class="field">
+                <label for="moduleDuration">Trajanje modula (min)</label>
+                <input type="number" name="courseUpdate[moduleDuration]" id="moduleDuration" value="<%=course.moduleDuration%>"/>
+            </div>
+            <div class="field">
+                <label for="lecturer">Predavač</label>
+                <select id="lecturer" name="courseUpdate[lecturer]" value="<%=course.lecturer%>">
+                    <%for(var i=0; i<lecturers.length; i++){%>
+                        <%if(lecturers[i]._id.equals(course.lecturer)){%>
+                            <option selected value="<%=lecturers[i]._id%>"><%=lecturers[i].firstName%> <%=lecturers[i].lastName%></option>
+                        <%}%>
+                        <%if(!lecturers[i]._id.equals(course.lecturer)){%>
+                            <option value="<%=lecturers[i]._id%>"><%=lecturers[i].firstName%> <%=lecturers[i].lastName%></option>
+                        <%}%>
+                    <%}%>
+                </select>
+            </div>
+            <!--
+            <div class="field">
+                <label for="moduleVideo">Video materijal</label>
+                <input type="file" name="courseUpdate[video]"/>
+            </div>
+            -->
+            <input type="submit" value="Pošalji"/>
+            <input type="reset" value="Obrišite unos">
+        </form>
+    </div>
+<%include ../partials/footer%>

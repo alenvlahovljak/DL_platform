@@ -15,10 +15,7 @@ const courseSchema = new mongoose.Schema({
         required: true,
         trim: true,
         minlength: [3, "Ime modula mora sadražavati minimalno 3 karaktera!"],
-        validate(value){
-            if(!validator.isAlphanumeric(value, "sr-RS@latin"))
-                throw new Error("Ime kursa mora sadržavati samo slova!");
-        }
+        
     },
     moduleDuration: {
         type: Number,
