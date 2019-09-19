@@ -50,7 +50,7 @@ router.put("/portal/users/:id", (req, res)=>{
 //DESTROY route
 router.delete("/portal/users/:id", (req, res)=>{
     User.findByIdAndRemove(req.params.id).then(()=>{
-        res.redirect("/portal/users/" + req.params.id);
+        res.redirect("/portal/users");
     }).catch((err)=>{
         throw new Error(err);
     });

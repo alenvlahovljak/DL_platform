@@ -57,6 +57,24 @@ router.get("/portal/courses/:id/edit", async (req, res)=>{
     }
 });
 
+//UPDATE route
+router.put("/portal/courses/:id", (req, res)=>{
+    Course.findByIdAndUpdate(req.params.id, req.body.courseUpdate).then((course)=>{
+        return res.redirect("/portal/courses/" + req.params.id);
+    }).catch((err)=>{
+        throw new Error(err);
+    });
+});
+
+//DESTROY route
+router.delete("/portal/courses/:id", (req, res)=>{
+    Course.findByIdAndRemove(req.params.id).then(()=>{
+        res.redirect("/portal/courses");
+    }).catch((err)=>{
+        throw new Error(err);
+    })
+});
+
 
 //Exporting routes
 module.exports = router;

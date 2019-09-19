@@ -48,7 +48,7 @@ router.put("/portal/lecturers/:id", (req, res)=>{
 //DESTROY route
 router.delete("/portal/lecturers/:id", (req, res)=>{
     Lecturer.findByIdAndRemove(req.params.id).then(()=>{
-        return res.redirect("/portal/lecturers/" + req.params.id);
+        return res.redirect("/portal/lecturers");
     }).catch((err)=>{
         throw new Error(err);
     });
