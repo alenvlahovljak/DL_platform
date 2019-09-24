@@ -12,7 +12,7 @@ const Course = require("../../models/Course");
 //INDEX route
 router.get("/portal/courses", (req, res)=>{
     Course.find({}).then((courses)=>{
-        res.send(courses);
+        res.json(courses);
     }).catch((err)=>{
         throw new Error(err);
     });
@@ -40,7 +40,7 @@ router.post("/portal/courses", (req, res)=>{
 //SHOW route
 router.get("/portal/courses/:id", (req, res)=>{     
     Course.findById(req.params.id).then((course)=>{
-        res.send(course);
+        res.json(course);
     }).catch((err)=>{
         throw new Error(err);
     });

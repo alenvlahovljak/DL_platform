@@ -12,7 +12,7 @@ const Lecturer = require("../../models/Lecturer");
 //INDEX route
 router.get("/portal/lecturers", (req, res)=>{
     Lecturer.find({}).then((lecturers)=>{
-        res.send(lecturers);
+        res.json(lecturers);
     }).catch((err)=>{
         throw new Error(err);
     });
@@ -21,7 +21,7 @@ router.get("/portal/lecturers", (req, res)=>{
 //SHOW route
 router.get("/portal/lecturers/:id", (req, res)=>{
     Lecturer.findById(req.params.id).then((lecturer)=>{
-        res.send(lecturer);
+        res.json(lecturer);
     }).catch((err)=>{
         throw new Error(err);
     });

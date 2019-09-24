@@ -11,7 +11,7 @@ const User = require("../../models/User");
 //INDEX route
 router.get("/portal/users", (req, res)=>{
     User.find({}).then((users)=>{
-        res.send(users);
+        res.json(users);
     }).catch((err)=>{
         throw new Error(err);
     });
@@ -22,7 +22,7 @@ router.get("/portal/users/:id", (req, res)=>{
     User.findById(req.params.id).then((user)=>{
         if(!user)
             res.status(302);
-        return res.send(user);
+        return res.json(user);
     }).catch((err)=>{
         throw new Error(err);
     });

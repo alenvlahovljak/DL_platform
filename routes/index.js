@@ -8,13 +8,13 @@ const Lecturer = require("../models/Lecturer");
 
 //********   USER   **********//
 
-//NEW route
-router.get("/users/new", (req, res)=>{
+//REGISTER NEW route
+router.get("/register", (req, res)=>{
     res.render("user/new");
 });
 
-//CREATE route
-router.post("/users", (req, res)=>{
+//REGISTER CREATE route
+router.post("/register", (req, res)=>{
     User.create(req.body.newUser).then((user)=>{
         return res.status(210).redirect("/portal");
     }).catch((err)=>{
