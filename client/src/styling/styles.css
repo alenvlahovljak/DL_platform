@@ -1,0 +1,50 @@
+#container {
+    position: relative;
+    left: 230px;
+    margin-bottom: 50px;
+    width: 100px;
+    border-left: 2px solid rgb(5, 0, 73);
+    
+    
+}
+
+.field {
+
+    width: 300px !important;
+
+}
+
+.lengthX {
+
+    width: 350px !important;
+
+}
+
+.pzp {
+    position: absolute;
+    margin-top: 150px;
+    left: 50px;
+}
+
+.dob {
+    width: 100px;
+}
+
+.border { 
+    
+    
+    border: 10px solid rgb(5, 0, 73);
+    border-style: solid;
+    border-radius: 40px;
+}
+
+.font {
+    
+    margin-top: 100px;
+    margin-left: 60px;
+  }
+
+  .space {
+      margin-left: 8px;
+  }
+
