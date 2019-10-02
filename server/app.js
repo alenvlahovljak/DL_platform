@@ -26,7 +26,8 @@ app.use(methodOverride("_method"));
 
 
 //Mongoose config
-let url = process.env.DATABASEURL || "mongodb://localhost:27017/DL_platform";
+//let url = process.env.DATABASEURL || "mongodb://localhost:27017/DL_platform";
+let url = process.env.DATABASEURL || "mongodb+srv://Admin:Admin@cluster0-te1xc.mongodb.net/DL_platform?retryWrites=true&w=majority";
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
 
 
