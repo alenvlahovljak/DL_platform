@@ -14,13 +14,6 @@
     "node_modules",
     "client/node_modules"
   ],
-  "keywords": [
-    "DL",
-    "DL_platform",
-    "Education"
-  ],
-  "author": "Samir Baltić, Alen Vlahovljak",
-  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.0",
     "ejs": "^2.7.1",
@@ -33,5 +26,14 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/alenvlahovljak/DL_platform.git"
-  }
+  },
+  "keywords": [
+    "DL",
+    "DL_platform",
+    "Education",
+    "create-react-app",
+    "react"
+  ],
+  "author": "Samir Baltić, Alen Vlahovljak",
+  "license": "MIT"
 }
