@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose"); 
 const methodOverride  = require("method-override");
 
+
 //Mongoose models config
 
 
@@ -34,9 +35,11 @@ app.use(courseRoutes);
 app.use(lecturerRoutes);
 
 
-//Port listening
-app.listen(5000,()=>{
-    console.log("DL server has started!");
-    console.log("*************************************");
-});
+//Port logic set-up (local & heroku)
+let PORT = process.env.PORT;
+if(PORT==null || process.env.port=="")
+    PORT = 5000;
 
+
+//Express.js listening port
+app.listen(PORT,()=> console.log("Server has started!"));
