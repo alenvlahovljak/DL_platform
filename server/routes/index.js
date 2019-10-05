@@ -8,11 +8,6 @@ const Lecturer = require("../models/Lecturer");
 
 //********   USER   **********//
 
-//REGISTER NEW route
-router.get("/register", (req, res)=>{
-    res.render("user/new");
-});
-
 //REGISTER CREATE route
 router.post("/register", (req, res)=>{
     User.create(req.body.newUser).then((user)=>{
@@ -22,13 +17,8 @@ router.post("/register", (req, res)=>{
     });
 });
 
-//lecturers
-//********   LECTURER   **********//
 
-//NEW route
-router.get("/lecturers/new", (req, res)=>{
-    res.render("lecturer/new");
-});
+//********   LECTURER   **********//
 
 //CREATE route
 router.post("/lecturers", (req, res)=>{
