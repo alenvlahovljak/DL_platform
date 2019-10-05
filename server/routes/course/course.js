@@ -18,6 +18,7 @@ router.get("/portal/courses", (req, res)=>{
     });
 });
 
+/*
 //NEW route
 router.get("/portal/courses/new", (req, res)=>{
     Lecturer.find({}).then((lecturers)=>{
@@ -26,6 +27,7 @@ router.get("/portal/courses/new", (req, res)=>{
         throw new Error(err);
     });
 });
+*/
 
 //CREATE route
 router.post("/portal/courses", (req, res)=>{
@@ -46,6 +48,7 @@ router.get("/portal/courses/:id", (req, res)=>{
     });
 });
 
+/*
 //EDIT route
 router.get("/portal/courses/:id/edit", async (req, res)=>{
     try{
@@ -56,6 +59,7 @@ router.get("/portal/courses/:id/edit", async (req, res)=>{
         throw new Error(err);
     }
 });
+*/
 
 //UPDATE route
 router.put("/portal/courses/:id", (req, res)=>{

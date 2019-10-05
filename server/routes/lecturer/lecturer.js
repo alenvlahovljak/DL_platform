@@ -27,15 +27,6 @@ router.get("/portal/lecturers/:id", (req, res)=>{
     });
 });
 
-//EDIT route
-router.get("/portal/lecturers/:id/edit", (req, res)=>{
-    Lecturer.findById(req.params.id).then((lecturer)=>{
-        res.render("lecturer/edit", {lecturer: lecturer});
-    }).catch((err)=>{
-        throw new Error(err);
-    });
-});
-
 //UPDATE route
 router.put("/portal/lecturers/:id", (req, res)=>{
     Lecturer.findByIdAndUpdate(req.params.id, req.body.lecturerUpdate).then((lecturer)=>{
