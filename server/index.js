@@ -35,7 +35,7 @@ app.use(courseRoutes);
 app.use(lecturerRoutes);
 
 
-//Port logic set-up (local & heroku)
+//Port logic set-up (local & Heroku)
 let PORT = process.env.PORT;
 if(PORT==null || process.env.port=="")
     PORT = 5000;
