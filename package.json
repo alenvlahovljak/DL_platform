@@ -3,12 +3,12 @@
   "version": "0.0.5",
   "description": "DL platform",
   "engines": {
-    "node": "10.x" 
+    "node": "10.x"
   },
   "main": "app.js",
   "scripts": {
     "start": "node server",
-    "build": "cd client/ && npm install && npm run build" 
+    "build": "cd client/ && npm install && npm run build"
   },
   "cacheDirectories": [
     "node_modules",
@@ -16,7 +16,6 @@
   ],
   "dependencies": {
     "body-parser": "^1.19.0",
-    "ejs": "^2.7.1",
     "express": "^4.17.1",
     "method-override": "^3.0.0",
     "mongoose": "^5.7.1",
