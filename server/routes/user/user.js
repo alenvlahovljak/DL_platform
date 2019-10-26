@@ -21,18 +21,9 @@ router.get("/portal/users", (req, res)=>{
 router.get("/portal/users/:id", (req, res)=>{
     User.findById(req.params.id).then((user)=>{
         if(!user)
-            res.status(302);
+        //test it
+            res.status(302).redirect("back");
         return res.json(user);
-    }).catch((err)=>{
-        throw new Error(err);
-    });
-});
-
-//EDIT route
-router.get("/portal/users/:id/edit", (req, res)=>{
-    User.findById(req.params.id).then((user)=>{
-        //Note: ES6 notation {user} same as {user: user}
-        res.render("user/edit", {user: user});
     }).catch((err)=>{
         throw new Error(err);
     });
