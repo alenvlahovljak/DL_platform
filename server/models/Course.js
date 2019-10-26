@@ -24,7 +24,8 @@ const courseSchema = new mongoose.Schema({
     },
     lecturer: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Lecturer"
+        ref: "Lecturer",
+        required: true
     }
 }, {
     timestamps: true
