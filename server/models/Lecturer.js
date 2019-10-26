@@ -85,11 +85,9 @@ const lecturerSchema = new mongoose.Schema({
             if(!validator.isEmail(value))
                 throw new Error("Unesena e-mail adresa nije validna!");
         }
-    },
-    registrationDate: {
-        type: Date,
-        default: Date.now
     }
+}, {
+    timestamps: true
 });
 
 

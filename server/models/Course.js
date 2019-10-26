@@ -25,11 +25,9 @@ const courseSchema = new mongoose.Schema({
     lecturer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Lecturer"
-    },
-    uploadDate: {
-        type: Date,
-        default: Date.now
     }
+}, {
+    timestamps: true
 });
 
 //Exporting mongoose model
