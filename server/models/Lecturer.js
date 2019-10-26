@@ -2,7 +2,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
-
 //Mongoose schema config
 const lecturerSchema = new mongoose.Schema({
     firstName: {
@@ -87,8 +86,16 @@ const lecturerSchema = new mongoose.Schema({
         }
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    toJSON : {virtuals: true}
 });
+
+//Virtuals document set-up
+lecturerSchema.virtual("courses", {
+    ref: "Course",
+    localField: "_id",
+    foreignField: "lecturer"
+})
 
 
 //Exporting mongoose model

@@ -11,7 +11,7 @@ const Lecturer = require("../../models/Lecturer");
 
 //INDEX route
 router.get("/portal/lecturers", (req, res)=>{
-    Lecturer.find({}).then((lecturers)=>{
+    Lecturer.find({}).populate("courses").exec().then((lecturers)=>{
         res.json(lecturers);
     }).catch((err)=>{
         throw new Error(err);

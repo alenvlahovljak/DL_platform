@@ -31,7 +31,6 @@ router.get("/portal/courses/new", (req, res)=>{
 
 //CREATE route
 router.post("/portal/courses", (req, res)=>{
-    console.log(req.body);
     Course.create(req.body.newCourse).then((course)=>{
         return res.status(210).redirect("/portal");
     }).catch((err)=>{

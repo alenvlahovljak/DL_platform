@@ -28,7 +28,8 @@ const courseSchema = new mongoose.Schema({
         required: true
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    toJSON: {virtuals: true}
 });
 
 //Exporting mongoose model
