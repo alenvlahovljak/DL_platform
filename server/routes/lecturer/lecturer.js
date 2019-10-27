@@ -10,17 +10,36 @@ const Lecturer = require("../../models/Lecturer");
 //********   USER   **********//
 
 //INDEX route
-router.get("/portal/lecturers", (req, res)=>{
-    Lecturer.find({}).populate("courses").exec().then((lecturers)=>{
-        res.json(lecturers);
-    }).catch((err)=>{
+router.get("/portal/lecturers", async (req, res)=>{
+    //Regular Expressions with global, multiline and case-insensitive modifiers
+    const firstName = new RegExp(req.query.firstName, "gmi");
+    const lastName = new RegExp(req.query.lastName, "gmi");
+    //parsing limit and skip queries
+    const limit = parseInt(req.query.limit);
+    const skip = parseInt(req.query.skip);
+    //handling sortBy logic
+    const sort = {};
+    if(req.query.sortBy){
+        const chunks = req.query.sortBy.split(":");
+        sort[chunks[0]] = chunks[1] === "desc"? -1 : 1;
+    }
+    try{
+        //filtering data by firstName and(or) lastName parameter(s): GET /portal/lecturers?firstName=...&lastName=...
+        //paginating data by limit and(or) skip parameters: GET /portal/lecturers?limit=...&skip=...
+        //sorting data by sortBy parameter (asc or desc order): GET /portal/lecturers?sortBy=...:asc/desc
+        await Lecturer.find({firstName, lastName}, null, {limit, skip, sort})
+        .populate("courses").exec()
+        .then((lecturers)=>{
+            res.json(lecturers);
+        });
+    } catch(err){
         throw new Error(err);
-    });
+    }
 });
 
 //SHOW route
 router.get("/portal/lecturers/:id", (req, res)=>{
-    Lecturer.findById(req.params.id).then((lecturer)=>{
+    Lecturer.findById(req.params.id).populate("courses").exec().then((lecturer)=>{
         res.json(lecturer);
     }).catch((err)=>{
         throw new Error(err);
@@ -38,7 +57,8 @@ router.put("/portal/lecturers/:id", (req, res)=>{
 
 //DESTROY route
 router.delete("/portal/lecturers/:id", (req, res)=>{
-    Lecturer.findByIdAndRemove(req.params.id).then(()=>{
+    Lecturer.findById(req.params.id).then((lecturer)=>{
+        lecturer.remove();
         return res.redirect("/portal/lecturers");
     }).catch((err)=>{
         throw new Error(err);

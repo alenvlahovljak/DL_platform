@@ -2,6 +2,9 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
+//Model config
+const Course = require("./Course");
+
 //Mongoose schema config
 const lecturerSchema = new mongoose.Schema({
     firstName: {
@@ -95,8 +98,13 @@ lecturerSchema.virtual("courses", {
     ref: "Course",
     localField: "_id",
     foreignField: "lecturer"
-})
+});
 
+//Delete Lecturers's courses when Lecturer is removed
+lecturerSchema.pre("remove", async function(next){
+    await Course.deleteMany({lecturer: this._id});
+    next();
+});
 
 //Exporting mongoose model
 module.exports = mongoose.model("Lecturer", lecturerSchema);
