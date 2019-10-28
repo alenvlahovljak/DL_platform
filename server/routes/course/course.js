@@ -10,12 +10,28 @@ const Course = require("../../models/Course");
 //********   COURSE   **********//
 
 //INDEX route
-router.get("/portal/courses", (req, res)=>{
-    Course.find({}).then((courses)=>{
-        res.json(courses);
-    }).catch((err)=>{
+router.get("/portal/courses", async (req, res)=>{
+    //Regular Expressions with global, multiline and case-insensitive modifiers
+    courseName = new RegExp(req.query.courseName, "gmi");
+    moduleName = new RegExp(req.query.moduleName, "gmi");
+    //parsing limit and skip queries
+    const limit = parseInt(req.query.limit);
+    const skip = parseInt(req.query.skip);
+    //handling sortBy logic
+    const sort = {};
+    if(req.query.sortBy){
+        const chunks = req.query.sortBy.split(":");
+        sort[chunks[0]] = chunks[1] === "desc"? -1 : 1;
+    }
+    try{
+    //filtering data by courseName and(or) moduleName parameter(s): GET /portal/courses?courseName=...&moduleName=...
+    //paginating data by limit and(or) skip parameters: GET /portal/courses?limit=...&skip=...
+    //sorting data by sortBy parameter (asc or desc order): GET /portal/courses?sortBy=...:asc/desc
+    await Course.find({courseName, moduleName}, null, {limit, skip, sort})
+    .populate("lecturer").exec((err, lecturer)=> res.json(lecturer));
+    } catch(err){
         throw new Error(err);
-    });
+    }
 });
 
 /*

@@ -10,6 +10,7 @@ const Lecturer = require("../../models/Lecturer");
 //********   USER   **********//
 
 //INDEX route
+//*note: fix security vulnerability - hide unnecessary data /flash: null arg
 router.get("/portal/lecturers", async (req, res)=>{
     //Regular Expressions with global, multiline and case-insensitive modifiers
     const firstName = new RegExp(req.query.firstName, "gmi");
@@ -28,10 +29,10 @@ router.get("/portal/lecturers", async (req, res)=>{
         //paginating data by limit and(or) skip parameters: GET /portal/lecturers?limit=...&skip=...
         //sorting data by sortBy parameter (asc or desc order): GET /portal/lecturers?sortBy=...:asc/desc
         await Lecturer.find({firstName, lastName}, null, {limit, skip, sort})
-        .populate("courses").exec()
-        .then((lecturers)=>{
-            res.json(lecturers);
-        });
+        .populate("courses").exec((err, lecturers)=> res.json(lecturers));
+        //.then((lecturers)=>{
+        //    res.json(lecturers);
+        //});
     } catch(err){
         throw new Error(err);
     }
