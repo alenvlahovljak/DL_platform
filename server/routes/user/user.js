@@ -9,12 +9,28 @@ const User = require("../../models/User");
 //********   USER   **********//
 
 //INDEX route
-router.get("/portal/users", (req, res)=>{
-    User.find({}).then((users)=>{
-        res.json(users);
-    }).catch((err)=>{
+router.get("/portal/users", async (req, res)=>{
+    //Regular Expressions with global, multiline and case-insensitive modifiers
+    const firstName = new RegExp(req.query.firstName, "gmi");
+    const lastName = new RegExp(req.query.lastName, "gmi");
+    //parsing limit and skip queries
+    const limit = parseInt(req.query.limit);
+    const skip = parseInt(req.query.skip);
+    //handling sortBy logic
+    const sort = {};
+    if(req.query.sortBy){
+        const chunks = req.query.sortBy.split(":");
+        sort[chunks[0]] = chunks[1] === "desc"? -1 : 1;
+    }
+    try{
+        //filtering data by firstName and(or) lastName parameter(s): GET /portal/users?firstName=...&lastName=...
+        //paginating data by limit and(or) skip parameters: GET /portal/users?limit=...&skip=...
+        //sorting data by sortBy parameter (asc or desc order): GET /portal/users?sortBy=...:asc/desc
+        await User.find({firstName, lastName}, null, {limit, skip, sort})
+        .then((users)=> res.json(users));
+    } catch(err){
         throw new Error(err);
-    });
+    }
 });
 
 //SHOW route
