@@ -8,14 +8,21 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        minlength: [3, "Ime kursa mora sadržavati minimalno 3 karaktera!"]
+        minlength: [3, "Ime kursa mora sadržavati minimalno 3 karaktera!"],
+        validate(value){
+            if(!validator.matches(value, /^[a-z\u0161\u0111\u010D\u0107\u017E ]*$/gmi))
+                throw new Error("Ime kursa mora sadržavati alfabetske karaktere!");
+        }
     },
     moduleName: {
         type: String,
         required: true,
         trim: true,
         minlength: [3, "Ime modula mora sadražavati minimalno 3 karaktera!"],
-        
+        validate(value){
+            if(!validator.matches(value, /^[a-z0-9\u0161\u0111\u010D\u0107\u017E ]*$/gmi))
+                throw new Error("Ime modula mora sadržavati alfanumeričke karaktere!");
+        }
     },
     moduleDuration: {
         type: Number,
