@@ -1,6 +1,9 @@
+//Define Global variables
+const app = express();
+const PORT = process.env.PORT || 5000;
+
 //Modules config
 const express = require("express");
-const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose"); 
 const methodOverride  = require("method-override");
@@ -8,8 +11,7 @@ const path = require("path");
 
 //Mongoose models config
 
-//Define Global variables
-const PORT = process.env.PORT || 5000;
+
 
 //Routes set-up
 const indexRoutes = require("./routes/index");
@@ -19,6 +21,7 @@ const courseRoutes = require("./routes/course/course");
 
 
 //Application config
+//extended: false
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(methodOverride("_method"));
