@@ -4,10 +4,12 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose"); 
 const methodOverride  = require("method-override");
-
+const path = require("path");
 
 //Mongoose models config
 
+//Define Global variables
+const PORT = process.env.PORT || 5000;
 
 //Routes set-up
 const indexRoutes = require("./routes/index");
@@ -40,13 +42,6 @@ app.use(indexRoutes);
 app.use(userRoutes);
 app.use(courseRoutes);
 app.use(lecturerRoutes);
-
-
-//Port logic set-up (local & Heroku)
-let PORT = process.env.PORT;
-if(PORT==null || process.env.port=="")
-    PORT = 5000;
-
 
 //Express.js listening port
 app.listen(PORT,()=> console.log("Server has started!"));
