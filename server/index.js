@@ -41,8 +41,6 @@ if(process.env.NODE_ENV==="production"){
     });
 }
 
-app.use(express.static('../client/build'));
-
 //Routes config
 app.use(indexRoutes);
 app.use(userRoutes);
