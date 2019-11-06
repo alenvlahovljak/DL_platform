@@ -1,13 +1,14 @@
-//Define Global variables
-const app = express();
-const PORT = process.env.PORT || 5000;
-
 //Modules config
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose"); 
 const methodOverride  = require("method-override");
 const path = require("path");
+
+//Define Global variables
+const app = express();
+const PORT = process.env.PORT || 5000;
+
 
 //Mongoose models config
 
