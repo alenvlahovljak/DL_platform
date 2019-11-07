@@ -25,6 +25,9 @@ const courseRoutes = require("./routes/course/course");
 //extended: false
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+app.use(express.static(path.resolve(__dirname, '../client/public')));
+
 app.use(methodOverride("_method"));
 
 
