@@ -5,6 +5,9 @@ const ageToBirth = require("age-to-birth-date");
 
 //Mongoose schema config
 const userSchema = new mongoose.Schema({
+    avatar: {
+        type: Buffer
+    },
     firstName: {
         type: String,
         required: true,

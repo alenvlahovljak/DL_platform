@@ -1,6 +1,6 @@
 {
   "name": "dl_platform",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "DL platform",
   "engines": {
     "node": "10.x"

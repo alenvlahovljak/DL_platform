@@ -2,7 +2,6 @@
 const express = require("express");
 const router = express.Router();
 
-
 //Mongoose model config
 const User = require("../../models/User");
 
@@ -62,7 +61,6 @@ router.delete("/portal/users/:id", (req, res)=>{
         throw new Error(err);
     });
 });
-
 
 //Exporting routes
 module.exports = router;

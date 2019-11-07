@@ -8,6 +8,9 @@ const Course = require("./Course");
 
 //Mongoose schema config
 const lecturerSchema = new mongoose.Schema({
+    avatar: {
+        type: Buffer
+    },
     firstName: {
         type: String,
         required: true,
