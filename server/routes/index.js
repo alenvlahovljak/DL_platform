@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
+const sharp = require("sharp");
 
 //Multer config
 const upload = multer({
@@ -20,29 +21,91 @@ const upload = multer({
 const User = require("../models/User");
 const Lecturer = require("../models/Lecturer");
 
+
+
+//********   AVATAR   **********//
+
 //CREATE route (avatar)
 router.post("/portal/:id/avatar", upload.single("avatar"), async (req, res)=>{
-    //Handling avatar logic
+    //Capitalizing first letter
     const q = req.query.avatar.replace(/^\w/, c => c.toUpperCase());
+    //Model generalization
     let Model = {};
+    //Resizing image and converting to png format
+    const buffer = await sharp(req.file.buffer).resize({width: 250, height:250}).png().toBuffer();
     try{
+        //Model choosing logic
         if(q=="User")
             Model = User;
         else if(q=="Lecturer")
             Model = Lecturer;
         else
             throw new Error("Greška");
-        await Model.findById(req.params.id).then((model)=>{
-            model.avatar = req.file.buffer;
-            model.save();
-        });
+        //Creating avatar buffer to mongoose model
+        const model = await Model.findById(req.params.id);
+        model.avatar = buffer;
+        await model.save();
+        res.send();
+    } catch(err){
+        throw new Error(err);
+    }
+}, (err, req, res, next)=>{
+    res.send({err: err.message});
+});
+
+//SHOW route (avatar)
+router.get("/portal/:id/avatar", async (req, res)=>{
+    //Capitalizing first letter
+    const q = req.query.avatar.replace(/^\w/, c => c.toUpperCase());
+    //Model generalization
+    let Model = {};
+    try{
+        //Model choosing logic
+        if(q=="User")
+            Model = User;
+        else if(q=="Lecturer")
+            Model = Lecturer;
+        else
+            throw new Error("Greška");
+        const model = await Model.findById(req.params.id);
+        if(!model || !model.avatar)
+            throw new Error("Korisnik nije registrovan ili ne posjeduje avatara!");
+        //Set-up file
+        res.set("Content-Type", "image/png");
+        res.send(model.avatar);
+    } catch(err){
+        throw new Error(err);
+    }
+});
+
+//DELETE route (avatar)
+router.delete("/portal/:id/avatar", async(req, res)=>{
+    //Capitalizing first letter
+    const q = req.query.avatar.replace(/^\w/, c => c.toUpperCase());
+    //Model generalization
+    let Model = {};
+    try{
+        //Model choosing logic
+        if(q=="User")
+            Model = User;
+        else if(q=="Lecturer")
+            Model = Lecturer;
+        else
+            throw new Error("Greška");
+        //Deleting avatar buffer from mongoose model
+        const model = await Model.findById(req.params.id);
+        if(!model || !model.avatar)
+            throw new Error("Korisnik nije registrovan ili ne posjeduje avatara!");
+        model.avatar = undefined;
+        model.save();
+        res.send();
     } catch(err){
         throw new Error(err);
     }
     res.send();
-}, (err, req, res, next)=>{
-    res.send({err: err.message});
 });
+
+
 
 
 //********   USER   **********//
@@ -57,6 +120,7 @@ router.post("/register", (req, res)=>{
 });
 
 
+
 //********   LECTURER   **********//
 
 //CREATE route
@@ -67,6 +131,9 @@ router.post("/lecturers", (req, res)=>{
         throw new Error(err);
     });
 });
+
+
+
 
 //Exporting routes
 module.exports = router;
