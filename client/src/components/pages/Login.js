@@ -9,7 +9,7 @@ class Login extends React.Component {
             <form className="login ui form">
              <input className="ui input focus"
                 type="text"
-                placeholder="Enter username..."
+                placeholder="Enter email"
              />
              <input className="ui input focus"
                 type="text"
