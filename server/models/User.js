@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         minlength: [3, "Ime mora sadržavati minimalno 3 karaktera!"],
         validate(value){
             if(!validator.matches(value, /^[a-z\u0161\u0111\u010D\u0107\u017E ]*$/igm))
-                throw new Error("Ime kursa mora sadržavati alfabetske karaktere!");
+                throw new Error("Ime mora sadržavati alfabetske karaktere!");
         }
     },
     lastName: {
@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
         minlength: [3, "Prezime mora sadržavati minimalno 3 karaktera!"],
         validate(value){
             if(!validator.matches(value, /^[a-z\u0161\u0111\u010D\u0107\u017E ]*$/igm))
-                throw new Error("Ime kursa mora sadržavati alfabetske karaktere!");
+                throw new Error("Prezime kursa mora sadržavati alfabetske karaktere!");
         }
     },
     birthDate: {

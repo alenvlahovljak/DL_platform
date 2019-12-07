@@ -4,6 +4,9 @@ const validator = require("validator");
 
 //Mongoose schema config
 const courseSchema = new mongoose.Schema({
+    avatar: {
+        type: Buffer
+    },
     courseName: {
         type: String,
         required: true,
@@ -29,6 +32,9 @@ const courseSchema = new mongoose.Schema({
         required: true,
         min: [5, "Minimalna dužina video materijala mora biti duža od 5 minuta!"]
     },
+    videos: [
+        {type: Buffer}
+    ],
     lecturer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Lecturer",
