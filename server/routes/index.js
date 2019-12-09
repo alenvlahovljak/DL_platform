@@ -4,7 +4,7 @@ const router = express.Router();
 const multer = require("multer");
 const sharp = require("sharp");
 
-//Multer config - avatar
+//Multer config
 const avatar = multer({
     //dest: "avatars",
     limits: {
@@ -17,10 +17,24 @@ const avatar = multer({
     }
 });
 
+const video = multer({
+    limits: {
+        //1 GB max upload
+        fileSize: 1024 * 1024 * 1024
+    },
+    fileFilter(req, file, cb){
+        if(!file.originalname.match(/\.(mp4)$/))
+            return cb(new Error("Prihvatljivi format videa je mp4!"));
+        cb(undefined, true);
+    }
+});
+
+
 //Mongoose model config
 const User = require("../models/User");
 const Lecturer = require("../models/Lecturer");
 const Course = require("../models/Course");
+const Material = require("../models/Material");
 
 
 
@@ -113,6 +127,59 @@ router.delete("/portal/:id/avatar", async(req, res)=>{
 });
 
 
+
+//********   VIDEO   **********//
+
+//CREATE route (video)
+router.post("/portal/:id/video", video.single("video"), async (req, res)=>{
+    try{
+        const course = await Course.findById(req.params.id);
+        if(course){
+            const materialObj = {
+                video: req.file,
+                lecturer: req.query.lecturer,
+                course: course._id
+            };
+            Material.create(materialObj).then((material)=>{
+                return res.status(210).redirect("/portal");
+            }).catch((err)=>{
+                throw new Error(err);
+            });
+        }
+    } catch(err){
+        throw new Error(err);
+    }
+}, (err, req, res, next)=>{
+    res.send({err: err.message});
+});
+
+//SHOW route (video)
+router.get("/portal/:id/video", async (req, res)=>{
+    try{
+        const course = await Course.findById(req.params.id);
+        const material = await Material.find({course: req.params.id});
+        if(!course || !material[0])
+            throw new Error("U bazi ne postoji kurs ili pripadajući video materijal!");
+        res.set("Content-Type", material[0].video.mimetype);
+        res.send(material[0].video.buffer);
+    } catch(err){
+        throw new Error(err);
+    }
+});
+
+//DELETE route (video)
+router.delete("/portal/:id/video", async (req, res)=>{
+    try{
+        const course = await Course.findById(req.params.id);
+        const material = await Material.find({course: req.params.id});
+        if(!course || !material[0])
+            throw new Error("U bazi ne postoji video materijal!");
+        await Material.deleteOne({course: req.params.id});
+        res.send();
+    } catch(err){
+        throw new Error(err);
+    }
+});
 
 
 

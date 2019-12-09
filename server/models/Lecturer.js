@@ -5,6 +5,7 @@ const ageToBirth = require("age-to-birth-date");
  
 //Model config
 const Course = require("./Course");
+const Material = require("./Material");
 
 //Mongoose schema config
 const lecturerSchema = new mongoose.Schema({
@@ -130,9 +131,10 @@ lecturerSchema.virtual("courses", {
     foreignField: "lecturer"
 });
 
-//Delete Lecturers's courses when Lecturer is removed
+//Delete Lecturer's courses when Lecturer is removed
 lecturerSchema.pre("remove", async function(next){
     await Course.deleteMany({lecturer: this._id});
+    await Material.deleteMany({lecturer: this._id});
     next();
 });
 

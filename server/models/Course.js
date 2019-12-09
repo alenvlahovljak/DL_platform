@@ -2,6 +2,9 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
+//Model config
+const Material = require("./Material");
+
 //Mongoose schema config
 const courseSchema = new mongoose.Schema({
     avatar: {
@@ -32,9 +35,6 @@ const courseSchema = new mongoose.Schema({
         required: true,
         min: [5, "Minimalna dužina video materijala mora biti duža od 5 minuta!"]
     },
-    videos: [
-        {type: Buffer}
-    ],
     lecturer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Lecturer",
@@ -42,6 +42,12 @@ const courseSchema = new mongoose.Schema({
     }
 }, {
     timestamps: true,
+});
+
+//Delete Courses's materials when Course is removed
+courseSchema.pre("remove", async function(next){
+    await Material.deleteMany({course: this._id});
+    next();
 });
 
 //Exporting mongoose model
